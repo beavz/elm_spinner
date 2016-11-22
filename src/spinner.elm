@@ -7,7 +7,11 @@ import Svg exposing (..)
 import Svg.Attributes exposing (..)
 
 type alias Model = { value : Int }
-type alias Msg = { }
+type Msg
+    = RequestSpinMagnitude
+    | ReceiveSpinMagnitude Int
+    | Spin Int
+    | SpinComplete
 
 view : Model -> Html Msg
 view model = 
@@ -17,8 +21,16 @@ view model =
     ]
 
 update : Msg -> Model -> (Model, Cmd Msg)
-update msg model =
-  ( model, Cmd.none )
+update msg model = 
+  case msg of
+    RequestSpinMagnitude -> 
+      ( model, Cmd.none )
+    ReceiveSpinMagnitude mag ->
+      ( model, Cmd.none )
+    Spin ->
+      ( model, Cmd.none )
+    SpinComplete ->
+      ( model, Cmd.none )
 
 initialModel : Model
 initialModel = { value = 1 }
