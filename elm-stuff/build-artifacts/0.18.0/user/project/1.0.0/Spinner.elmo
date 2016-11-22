@@ -1,0 +1,86 @@
+var _user$project$Spinner$initialModel = {value: 1};
+var _user$project$Spinner$update = F2(
+	function (msg, model) {
+		return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+	});
+var _user$project$Spinner$view = function (model) {
+	return A2(
+		_elm_lang$svg$Svg$svg,
+		{
+			ctor: '::',
+			_0: _elm_lang$svg$Svg_Attributes$viewBox('-200 -200 400 400'),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$width('400px'),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$height('400px'),
+					_1: {ctor: '[]'}
+				}
+			}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$svg$Svg$circle,
+				{
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$fill('blue'),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$svg$Svg_Attributes$cx('0'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$svg$Svg_Attributes$cy('0'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$svg$Svg_Attributes$r('200'),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				},
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$svg$Svg$polygon,
+					{
+						ctor: '::',
+						_0: _elm_lang$svg$Svg_Attributes$points('10,20 -10,20 0,-20 10,20'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$svg$Svg_Attributes$stroke('orange'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$svg$Svg_Attributes$strokeWidth('3'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$svg$Svg_Attributes$fill('none'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$svg$Svg_Attributes$strokeLinejoin('round'),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}
+					},
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _user$project$Spinner$main = _elm_lang$html$Html$program(
+	{
+		init: {ctor: '_Tuple2', _0: _user$project$Spinner$initialModel, _1: _elm_lang$core$Platform_Cmd$none},
+		view: _user$project$Spinner$view,
+		update: _user$project$Spinner$update,
+		subscriptions: function (_p0) {
+			return _elm_lang$core$Platform_Sub$none;
+		}
+	})();
+var _user$project$Spinner$Model = function (a) {
+	return {value: a};
+};
+var _user$project$Spinner$Msg = {};
