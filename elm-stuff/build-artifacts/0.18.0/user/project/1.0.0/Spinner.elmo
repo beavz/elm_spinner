@@ -1,8 +1,50 @@
-var _user$project$Spinner$initialModel = {value: 1};
+var _user$project$Spinner$initialModel = {theta: 0, oomph: 0};
+var _user$project$Spinner$Model = F2(
+	function (a, b) {
+		return {theta: a, oomph: b};
+	});
+var _user$project$Spinner$MSPassed = function (a) {
+	return {ctor: 'MSPassed', _0: a};
+};
+var _user$project$Spinner$subscriptions = function (_p0) {
+	var _p1 = _p0;
+	return (_elm_lang$core$Native_Utils.cmp(_p1.oomph, 0) > 0) ? A2(_elm_lang$core$Time$every, _elm_lang$core$Time$millisecond, _user$project$Spinner$MSPassed) : _elm_lang$core$Platform_Sub$none;
+};
+var _user$project$Spinner$ReceiveSpinMagnitude = function (a) {
+	return {ctor: 'ReceiveSpinMagnitude', _0: a};
+};
 var _user$project$Spinner$update = F2(
 	function (msg, model) {
-		return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+		var _p2 = msg;
+		switch (_p2.ctor) {
+			case 'RequestSpinMagnitude':
+				return {
+					ctor: '_Tuple2',
+					_0: model,
+					_1: A2(
+						_elm_lang$core$Random$generate,
+						_user$project$Spinner$ReceiveSpinMagnitude,
+						A2(_elm_lang$core$Random$int, 100, 500))
+				};
+			case 'ReceiveSpinMagnitude':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{oomph: model.oomph + _p2._0}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			default:
+				return (_elm_lang$core$Native_Utils.cmp(model.oomph, 0) > 0) ? {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{theta: model.theta + 1, oomph: model.oomph - 1}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				} : {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+		}
 	});
+var _user$project$Spinner$RequestSpinMagnitude = {ctor: 'RequestSpinMagnitude'};
 var _user$project$Spinner$view = function (model) {
 	return A2(
 		_elm_lang$svg$Svg$svg,
@@ -35,7 +77,11 @@ var _user$project$Spinner$view = function (model) {
 							_1: {
 								ctor: '::',
 								_0: _elm_lang$svg$Svg_Attributes$r('200'),
-								_1: {ctor: '[]'}
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Events$onClick(_user$project$Spinner$RequestSpinMagnitude),
+									_1: {ctor: '[]'}
+								}
 							}
 						}
 					}
@@ -47,7 +93,7 @@ var _user$project$Spinner$view = function (model) {
 					_elm_lang$svg$Svg$polygon,
 					{
 						ctor: '::',
-						_0: _elm_lang$svg$Svg_Attributes$points('10,20 -10,20 0,-20 10,20'),
+						_0: _elm_lang$svg$Svg_Attributes$points('10,20 -10,20 0,-100 10,20'),
 						_1: {
 							ctor: '::',
 							_0: _elm_lang$svg$Svg_Attributes$stroke('orange'),
@@ -60,7 +106,25 @@ var _user$project$Spinner$view = function (model) {
 									_1: {
 										ctor: '::',
 										_0: _elm_lang$svg$Svg_Attributes$strokeLinejoin('round'),
-										_1: {ctor: '[]'}
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$svg$Svg_Attributes$transform(
+												_elm_lang$core$String$concat(
+													{
+														ctor: '::',
+														_0: 'rotate(',
+														_1: {
+															ctor: '::',
+															_0: _elm_lang$core$Basics$toString(model.theta),
+															_1: {
+																ctor: '::',
+																_0: ' 0 0)',
+																_1: {ctor: '[]'}
+															}
+														}
+													})),
+											_1: {ctor: '[]'}
+										}
 									}
 								}
 							}
@@ -76,11 +140,5 @@ var _user$project$Spinner$main = _elm_lang$html$Html$program(
 		init: {ctor: '_Tuple2', _0: _user$project$Spinner$initialModel, _1: _elm_lang$core$Platform_Cmd$none},
 		view: _user$project$Spinner$view,
 		update: _user$project$Spinner$update,
-		subscriptions: function (_p0) {
-			return _elm_lang$core$Platform_Sub$none;
-		}
+		subscriptions: _user$project$Spinner$subscriptions
 	})();
-var _user$project$Spinner$Model = function (a) {
-	return {value: a};
-};
-var _user$project$Spinner$Msg = {};
